@@ -1,2 +1,3 @@
 # joolz_telegram_bot
-Deploy to a server and run echobot.py
+In echobot, inser the token in the updater call.
+Deploy to server and run echobot.py

@@ -38,11 +38,16 @@ def echo(update, context):
 
 
 def main():
-    """Start the bot."""
+    """Start the bot.
+
+    Add the token when calling updater
+
+    """
     # Create the Updater and pass it your bot's token.
     # Make sure to set use_context=True to use the new context based callbacks
     # Post version 12 this will no longer be necessary
-    updater = Updater("1331358860:AAHXMmP6jskOjFoaHA-DUXmtqYe_H-aFEg4", use_context=True)
+
+    updater = Updater("Token goes here", use_context=True)
 
     # Get the dispatcher to register handlers
     dp = updater.dispatcher
