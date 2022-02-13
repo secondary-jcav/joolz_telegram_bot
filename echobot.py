@@ -1,5 +1,6 @@
 import logging
 import requests
+import json
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 
 # Enable logging
@@ -12,6 +13,7 @@ logger = logging.getLogger(__name__)
 
 # Define a few command handlers. These usually take the two arguments update and
 # context. Error handlers also receive the raised TelegramError object in error.
+
 def start(update, context):
     """Send a message when the command /start is issued."""
     update.message.reply_text('¡Hola! Escribe el título en inglés de la película que quieres revisar')
@@ -24,13 +26,18 @@ def help_command(update, context):
 
 def echo(update, context):
     """Echo the user message."""
+    get_rotten_tomatoes_rating(update)
+
+
+def get_rotten_tomatoes_rating(update):
     basic_url = 'https://www.rottentomatoes.com/api/private/v2.0/search?q='
     r = requests.get(basic_url + update.message.text)
     dict_response = r.json()
     # Print the movie name, year & score
     for movie_item in dict_response['movies']:
         if 'meterScore' in movie_item:
-            update.message.reply_text(f"{movie_item['name']} ({movie_item['year']}) tiene una puntuación de {movie_item['meterScore']}/100")
+            update.message.reply_text(
+                f"{movie_item['name']} ({movie_item['year']}) tiene una puntuación de {movie_item['meterScore']}/100")
     # Say that no movies were found
     if not dict_response['movies']:
         #  update.message.reply_text(update.message.text)
@@ -46,8 +53,11 @@ def main():
     # Create the Updater and pass it your bot's token.
     # Make sure to set use_context=True to use the new context based callbacks
     # Post version 12 this will no longer be necessary
-
-    updater = Updater("Token goes here", use_context=True)
+    with open('token.json') as tj:
+        data = json.load(tj)
+    token = data["token"]
+    # Token string goes here
+    updater = Updater(token, use_context=True)
 
     # Get the dispatcher to register handlers
     dp = updater.dispatcher
