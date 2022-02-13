@@ -1,6 +1,6 @@
 **Goals**  
 1)Create a personalized bot using Telegram's python API    
-2)Run it on AWS EC2 instance or lamba
+2)Run it on AWS EC2 instance or lambda
 
 
 **Requirements**  
