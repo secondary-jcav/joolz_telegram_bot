@@ -1,3 +1,9 @@
+**UPDATE**   
+This is a few years old. Rotten Tomatoes no longer offers a free API
+So, will change this. In the meantime, The Movie Database free API seems to work ok
+
+**Everything below this is deprecated**    
+
 **Goals**  
 1)Create a personalized bot using Telegram's python API    
 2)Run it on AWS EC2 instance or lambda
